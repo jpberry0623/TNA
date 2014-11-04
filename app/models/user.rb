@@ -2,4 +2,8 @@ class User < ActiveRecord::Base
 	has_secure_password
 
 	has_many :patients
+
+	validates :email, :username, presence: true
+  validates :email, :username, uniqueness: true
+  validates :password, :length => {minimum: 4}
 end
