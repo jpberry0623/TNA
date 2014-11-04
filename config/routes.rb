@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
 
-  resources :users
-  resources :patients
+  resources :users, only: [:show, :edit, :update, :destroy]
+  resources :patients, only: [:show, :edit, :update, :destroy] 
+
+  get "patients" => 'patients#show'
+
+  get 'signup' => 'users#new', :as => :signup
+  post 'signup' => 'users#create'
+
+  ## SESSIONS
+  get 'login' => 'sessions#new', :as => :login
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+
+  root to: 'users#new'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
